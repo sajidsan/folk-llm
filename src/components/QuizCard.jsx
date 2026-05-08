@@ -218,7 +218,7 @@ export default function QuizCard({ question, index, total, userAnswer, onAnswer,
               <Box sx={{ px: 2.5, pt: 2, pb: 1.5 }}>
                 <Typography sx={{
                   fontSize: '1rem', fontFamily: '"Poppins", sans-serif',
-                  fontWeight: 600, color: g.onTicket, mb: 0.75,
+                  fontWeight: 600, color: g.onTicketMid, mb: 0.75,
                 }}>
                   {statementTrue ? 'How this works' : 'The truth'}
                 </Typography>
@@ -232,7 +232,7 @@ export default function QuizCard({ question, index, total, userAnswer, onAnswer,
               <Box sx={{ px: 2.5, pt: 1.5, pb: 1.5 }}>
                 <Typography sx={{
                   fontSize: '1rem', fontFamily: '"Poppins", sans-serif',
-                  fontWeight: 600, color: g.onTicket, mb: 0.75,
+                  fontWeight: 600, color: g.onTicketMid, mb: 0.75,
                 }}>
                   How to use this
                 </Typography>

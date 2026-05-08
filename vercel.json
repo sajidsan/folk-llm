@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/folk-llm/assets/:file*", "destination": "/assets/:file*" },
+    { "source": "/folk-llm/:path*",        "destination": "/index.html"    },
+    { "source": "/folk-llm",               "destination": "/index.html"    }
+  ]
+}

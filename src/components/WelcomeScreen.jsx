@@ -57,16 +57,64 @@ export default function WelcomeScreen({ onStart, total }) {
         </Typography>
 
         {/* Title block */}
-        <Box>
+        <Box sx={{ mt: '-4px' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
-            <Box sx={{
-              width: 40, height: 40,
-              border: `1px solid ${g.border}`,
-              borderRadius: g.shapeSm,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: g.accent,
-            }}>
-              <Robot size={20} />
+            {/* Robot icon with floating speech bubble */}
+            <Box sx={{ position: 'relative', display: 'inline-flex', flexShrink: 0 }}>
+              {/* Speech bubble — sits just above robot box, tail overlaps into it */}
+              <Box sx={{
+                position: 'absolute',
+                bottom: 'calc(100% - 6px)',
+                left: 'calc(50% + 8px)',
+                transform: 'translateX(-18%)',
+                bgcolor: g.bg,
+                border: `1px solid ${g.borderMid}`,
+                borderRadius: g.shapeSm,
+                px: 1, py: 0.35,
+                whiteSpace: 'nowrap',
+                zIndex: 2,
+                // Outer triangle (border colour)
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: '100%',
+                  left: '14px',
+                  borderLeft: '6px solid transparent',
+                  borderRight: '6px solid transparent',
+                  borderTop: `6px solid ${g.borderMid}`,
+                },
+                // Inner triangle (app bg colour — makes it look hollow)
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 'calc(100% - 1px)',
+                  left: '15px',
+                  borderLeft: '5px solid transparent',
+                  borderRight: '5px solid transparent',
+                  borderTop: `5px solid ${g.bg}`,
+                  zIndex: 3,
+                },
+              }}>
+                <Typography sx={{
+                  fontSize: '0.6rem',
+                  fontFamily: '"Space Mono", monospace',
+                  fontStyle: 'italic',
+                  color: g.onBgDimmer,
+                  lineHeight: 1,
+                }}>
+                  sometimes i lie!
+                </Typography>
+              </Box>
+              {/* Robot icon box */}
+              <Box sx={{
+                width: 40, height: 40,
+                border: `1px solid ${g.border}`,
+                borderRadius: g.shapeSm,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: g.accent,
+              }}>
+                <Robot size={20} />
+              </Box>
             </Box>
             <Typography sx={{
               fontSize: '0.62rem',
@@ -74,7 +122,7 @@ export default function WelcomeScreen({ onStart, total }) {
               textTransform: 'uppercase',
               color: g.onBgDim,
             }}>
-              Folk LLM Quiz
+              Folk LLM
             </Typography>
           </Box>
 
@@ -97,7 +145,7 @@ export default function WelcomeScreen({ onStart, total }) {
             color: g.onBgDim,
           }}>
             You use AI every day. But how much of what you think you know is
-            folk wisdom — and how much is grounded in how these systems actually work?
+            folk wisdom, and how much is grounded in how these systems actually work?
           </Typography>
         </Box>
 
