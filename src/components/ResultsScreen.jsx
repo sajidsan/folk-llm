@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Box, Typography, Button, Container, Fade, Divider, Link } from '@mui/material'
-import { Sun, HalloweenSkull, Check, Close, RefreshCw, ChatCircle, ArrowUpRight, AiFlow, Chip, Database, FolderLocked, LightbulbOn, Robot, CodeSquare } from 'griddy-icons'
+import { Sun, HalloweenSkull, Check, Close, RefreshCw, ArrowUpRight, AiFlow, Chip, Database, FolderLocked, LightbulbOn, Robot, CodeSquare } from 'griddy-icons'
 import { g } from '../theme'
 
 const CATEGORY_META = {
@@ -291,31 +291,14 @@ export default function ResultsScreen({ answers, questions, onRestart }) {
             </Box>
           )}
 
-          <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={onRestart}
-              endIcon={<RefreshCw size={20} />}
-            >
-              Try Again
-            </Button>
-            <Button
-              variant="outlined"
-              size="large"
-              component="a"
-              href="https://sajidsan.com"
-              endIcon={<ChatCircle size={20} color={g.onBgDim} />}
-              sx={{
-                borderColor: g.borderMid,
-                color: g.onBgDim,
-                textDecoration: 'none',
-                '&:hover': { borderColor: g.borderStrong, bgcolor: 'transparent' },
-              }}
-            >
-              Say Hi
-            </Button>
-          </Box>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={onRestart}
+            endIcon={<RefreshCw size={20} />}
+          >
+            Try Again
+          </Button>
 
         </Box>
       </Fade>

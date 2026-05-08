@@ -35,29 +35,29 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* Home link — only on welcome + results, scrolls with page */}
-      {screen !== 'quiz' && (
-        <Box
-          component="a"
-          href="https://sajidsan.com"
-          sx={{
-            position: 'absolute',
-            top: { xs: '16px', sm: '24px' },
-            left: 'auto',
-            right: { xs: '16px', sm: '24px' },
-            color: g.onBgDimmer,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 100,
-            textDecoration: 'none',
-            transition: 'color 0.15s',
-            '&:hover': { color: g.onBgDim },
-          }}
-        >
-          <Vacation size={18} />
-        </Box>
-      )}
+      <Box sx={{ position: 'relative' }}>
+        {/* Vacation icon — only on welcome + results, scrolls with page */}
+        {screen !== 'quiz' && (
+          <Box
+            component="a"
+            href="https://sajidsan.com"
+            sx={{
+              position: 'absolute',
+              top: { xs: '16px', sm: '24px' },
+              right: { xs: '16px', sm: '24px' },
+              color: g.onBgDimmer,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 100,
+              textDecoration: 'none',
+              transition: 'color 0.15s',
+              '&:hover': { color: g.onBgDim },
+            }}
+          >
+            <Vacation size={18} />
+          </Box>
+        )}
       {screen === 'welcome' && <WelcomeScreen onStart={handleStart} total={questions.length} />}
       {screen === 'quiz' && (
         <QuizCard
@@ -78,6 +78,7 @@ export default function App() {
           onRestart={() => setScreen('welcome')}
         />
       )}
+      </Box>
     </ThemeProvider>
   )
 }
