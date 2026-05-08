@@ -187,7 +187,7 @@ export default function QuizCard({ question, index, total, userAnswer, onAnswer,
                 bgcolor: statementTrue ? 'transparent' : 'rgba(0,0,0,0.04)',
               }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: g.onTicketMid }}>
-                  <Box sx={{ display: 'flex', position: 'relative', top: '-2px' }}>
+                  <Box sx={{ display: 'flex' }}>
                     {statementTrue ? <Sun size={16} /> : <HalloweenSkull size={16} />}
                   </Box>
                   <Typography sx={{
