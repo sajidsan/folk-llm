@@ -40,7 +40,7 @@ export default function App() {
         component="a"
         href="https://sajidsan.com"
         sx={{
-          position: 'fixed',
+          position: 'absolute',
           top: { xs: '16px', sm: '24px' },
           left: 'auto',
           right: { xs: '16px', sm: '24px' },
