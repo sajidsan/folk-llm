@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ThemeProvider, CssBaseline, Box } from '@mui/material'
-import { Home } from 'griddy-icons'
+import { Vacation } from 'griddy-icons'
 import { theme } from './theme'
 import { g } from './theme'
 import WelcomeScreen from './components/WelcomeScreen'
@@ -35,27 +35,29 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* Home link — top-right on desktop, top-left on mobile */}
-      <Box
-        component="a"
-        href="https://sajidsan.com"
-        sx={{
-          position: 'absolute',
-          top: { xs: '16px', sm: '24px' },
-          left: 'auto',
-          right: { xs: '16px', sm: '24px' },
-          color: g.onBgDimmer,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 100,
-          textDecoration: 'none',
-          transition: 'color 0.15s',
-          '&:hover': { color: g.onBgDim },
-        }}
-      >
-        <Home size={18} />
-      </Box>
+      {/* Home link — only on welcome + results, scrolls with page */}
+      {screen !== 'quiz' && (
+        <Box
+          component="a"
+          href="https://sajidsan.com"
+          sx={{
+            position: 'absolute',
+            top: { xs: '16px', sm: '24px' },
+            left: 'auto',
+            right: { xs: '16px', sm: '24px' },
+            color: g.onBgDimmer,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100,
+            textDecoration: 'none',
+            transition: 'color 0.15s',
+            '&:hover': { color: g.onBgDim },
+          }}
+        >
+          <Vacation size={18} />
+        </Box>
+      )}
       {screen === 'welcome' && <WelcomeScreen onStart={handleStart} total={questions.length} />}
       {screen === 'quiz' && (
         <QuizCard

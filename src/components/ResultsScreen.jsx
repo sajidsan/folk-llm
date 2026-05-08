@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Box, Typography, Button, Container, Fade, Divider, Link } from '@mui/material'
-import { Sun, HalloweenSkull, Check, Close, RefreshCw, ChatCircleAlert, ArrowUpRight, AiFlow, Chip, Database, FolderLocked, LightbulbOn, Robot, CodeSquare } from 'griddy-icons'
+import { Sun, HalloweenSkull, Check, Close, RefreshCw, ChatCircle, ArrowUpRight, AiFlow, Chip, Database, FolderLocked, LightbulbOn, Robot, CodeSquare } from 'griddy-icons'
 import { g } from '../theme'
 
 const CATEGORY_META = {
@@ -40,22 +40,8 @@ export default function ResultsScreen({ answers, questions, onRestart }) {
   const score      = answers.filter(a => a.correct).length
   const pct        = answered > 0 ? Math.round((score / answered) * 100) : 0
   const tier       = getTier(pct)
-  const [copied, setCopied] = useState(false)
-
   // Scroll to top whenever the results screen mounts
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
-
-  async function handleShare() {
-    const label = isComplete ? `${score}/${answered}` : `${score}/${answered} (incomplete)`
-    const text  = `I scored ${label} on Folk LLM — "${tier.label}"\n\nFolk LLM tests whether you actually understand how AI models work, not just folk wisdom about them.`
-    if (navigator.share) {
-      try { await navigator.share({ title: 'Folk LLM', text }) } catch (_) {}
-    } else {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2200)
-    }
-  }
 
   const wrongItems = answers
     .map((a, i) => ({ ...a, question: questions[i] }))
@@ -310,22 +296,24 @@ export default function ResultsScreen({ answers, questions, onRestart }) {
               variant="contained"
               size="large"
               onClick={onRestart}
-              endIcon={<RefreshCw size={16} />}
+              endIcon={<RefreshCw size={20} />}
             >
               Try Again
             </Button>
             <Button
               variant="outlined"
               size="large"
-              onClick={handleShare}
-              endIcon={<ChatCircleAlert size={16} />}
+              component="a"
+              href="https://sajidsan.com"
+              endIcon={<ChatCircle size={20} color={g.onBgDim} />}
               sx={{
                 borderColor: g.borderMid,
                 color: g.onBgDim,
+                textDecoration: 'none',
                 '&:hover': { borderColor: g.borderStrong, bgcolor: 'transparent' },
               }}
             >
-              {copied ? 'Copied!' : 'Share Results'}
+              Say Hi
             </Button>
           </Box>
 

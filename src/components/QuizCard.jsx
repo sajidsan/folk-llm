@@ -307,7 +307,7 @@ export default function QuizCard({ question, index, total, userAnswer, onAnswer,
                 '&:hover': { color: '#a89e8e' },
               }}
             >
-              <Cleaver size={14} />
+              <Cleaver size={18} />
               Cut it Short and Jump to the End
             </Box>
 
