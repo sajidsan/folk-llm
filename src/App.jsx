@@ -5,8 +5,11 @@ import { theme } from './theme'
 import { g } from './theme'
 import WelcomeScreen from './components/WelcomeScreen'
 import QuizCard from './components/QuizCard'
+import MidpointScreen from './components/MidpointScreen'
 import ResultsScreen from './components/ResultsScreen'
 import { questions } from './data/questions'
+
+const MIDPOINT_INDEX = Math.floor(questions.length / 2) - 1  // show after Q8
 
 export default function App() {
   const [screen, setScreen] = useState('welcome')
@@ -25,11 +28,18 @@ export default function App() {
   }
 
   function handleNext() {
-    if (currentIndex < questions.length - 1) {
+    if (currentIndex === MIDPOINT_INDEX) {
+      setScreen('midpoint')
+    } else if (currentIndex < questions.length - 1) {
       setCurrentIndex(i => i + 1)
     } else {
       setScreen('results')
     }
+  }
+
+  function handleMidpointContinue() {
+    setCurrentIndex(MIDPOINT_INDEX + 1)
+    setScreen('quiz')
   }
 
   return (
@@ -68,6 +78,14 @@ export default function App() {
           onAnswer={handleAnswer}
           onNext={handleNext}
           onExit={() => setScreen('welcome')}
+          onSkipToEnd={() => setScreen('results')}
+        />
+      )}
+      {screen === 'midpoint' && (
+        <MidpointScreen
+          answers={answers}
+          total={questions.length}
+          onContinue={handleMidpointContinue}
           onSkipToEnd={() => setScreen('results')}
         />
       )}

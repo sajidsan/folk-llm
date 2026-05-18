@@ -1,5 +1,6 @@
-import { Box, Card, CardContent, Typography, LinearProgress, Button, Fade, Divider, Link, Tooltip } from '@mui/material'
-import { Sun, HalloweenSkull, Cleaver, ArrowRight, ArrowUpRight, AiFlow, Chip, Database, FolderLocked, LightbulbOn, Robot, CodeSquare, Check, Close } from 'griddy-icons'
+import { useState, useEffect } from 'react'
+import { Box, Card, CardContent, Typography, LinearProgress, Button, Fade, Divider, Link, Tooltip, Collapse } from '@mui/material'
+import { Sun, HalloweenSkull, Cleaver, ChevronUp, ChevronDown, ArrowRight, ArrowUpRight, AiFlow, Chip, Database, FolderLocked, LightbulbOn, Robot, CodeSquare, Check, Close } from 'griddy-icons'
 import { g } from '../theme'
 
 const CATEGORY_META = {
@@ -33,7 +34,7 @@ function AnswerButton({ label, Icon, onClick }) {
         flex: 1, position: 'relative', overflow: 'hidden',
         bgcolor: g.surfaceHigh, color: g.onBgDim,
         border: `1px solid ${g.borderMid}`, borderRadius: g.shapeSm,
-        py: '16px', px: 2, fontSize: '0.9rem', fontWeight: 600,
+        py: '16px', pl: 1, pr: 3, fontSize: '0.9rem', fontWeight: 600,
         fontFamily: '"Poppins", sans-serif', letterSpacing: '0.01em',
         cursor: 'pointer', display: 'flex', alignItems: 'center',
         justifyContent: 'center', gap: '10px',
@@ -52,6 +53,11 @@ function AnswerButton({ label, Icon, onClick }) {
 }
 
 export default function QuizCard({ question, index, total, userAnswer, onAnswer, onNext, onExit, onSkipToEnd }) {
+  const [statementOpen, setStatementOpen] = useState(false)
+
+  // Reset accordion when question changes, but NOT when the answer is submitted
+  useEffect(() => { setStatementOpen(false) }, [index])
+
   const hasAnswered   = userAnswer !== undefined
   const isLast        = index === total - 1
   const correct       = hasAnswered && userAnswer.correct
@@ -144,21 +150,39 @@ export default function QuizCard({ question, index, total, userAnswer, onAnswer,
               {meta.label}
             </Typography>
           </Box>
-          <Box sx={{ p: 2.5 }}>
+          <Box sx={{ pt: 2.5, px: 2.5, pb: 1.5 }}>
             <Typography sx={{
               fontSize: 'clamp(1.05rem, 2.5vw, 1.2rem)',
               fontFamily: '"Poppins", sans-serif',
-              fontWeight: 700, lineHeight: 1.45, color: g.onBg, mb: 2, letterSpacing: '-0.01em',
+              fontWeight: 700, lineHeight: 1.45, color: hasAnswered && !statementTrue ? g.onBgDimmer : g.onBg, mb: 1, letterSpacing: '-0.01em',
             }}>
               {question.title}
             </Typography>
-            <Typography sx={{
-              fontSize: '0.9rem', fontFamily: '"Newsreader", Georgia, serif',
-              fontWeight: 400, lineHeight: 1.8, color: g.onBgDim,
-              pl: 1.5, borderLeft: `2px solid ${g.borderMid}`,
-            }}>
-              {question.statement}
-            </Typography>
+            {/* Expandable statement detail */}
+            <Box component="button"
+              onClick={() => setStatementOpen(o => !o)}
+              sx={{
+                background: 'none', border: 'none', cursor: 'pointer', p: 0,
+                fontFamily: '"Newsreader", Georgia, serif',
+                fontSize: '0.9rem', fontWeight: 400,
+                color: g.onBgDimmer, display: 'inline-flex', alignItems: 'center',
+                gap: 0.4, mt: 0.5,
+                '&:hover': { color: g.onBgDim },
+              }}
+            >
+              {statementOpen ? 'Less' : 'More'}
+              {statementOpen ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+            </Box>
+            <Collapse in={statementOpen} unmountOnExit={false}>
+              <Typography sx={{
+                fontSize: '0.9rem', fontFamily: '"Newsreader", Georgia, serif',
+                fontWeight: 400, lineHeight: 1.8, color: g.onBgDim,
+                pl: 1.5, borderLeft: `2px solid ${g.borderMid}`,
+                mt: 1,
+              }}>
+                {question.statement}
+              </Typography>
+            </Collapse>
           </Box>
         </CardContent>
       </Card>
@@ -300,11 +324,11 @@ export default function QuizCard({ question, index, total, userAnswer, onAnswer,
               sx={{
                 background: 'none', border: 'none', cursor: 'pointer',
                 fontFamily: '"Poppins", sans-serif', fontSize: '0.8rem',
-                fontWeight: 500, color: '#c4bcac',
+                fontWeight: 500, color: g.onBgDimmer,
                 py: 0.5, display: 'flex', alignItems: 'center',
                 justifyContent: 'center', gap: '7px', width: '100%',
                 letterSpacing: '0.01em',
-                '&:hover': { color: '#a89e8e' },
+                '&:hover': { color: g.onBgDim },
               }}
             >
               <Cleaver size={18} />

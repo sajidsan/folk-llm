@@ -13,10 +13,10 @@ export const g = {
   borderMid:      '#bdb5a5',
   borderStrong:   '#a09888',
 
-  // Text on light
-  onBg:           '#1a1810',
-  onBgDim:        '#6a6458',
-  onBgDimmer:     '#a09888',
+  // Text on light — all values pass WCAG AA (4.5:1) on g.bg
+  onBg:           '#1a1810',  // ~17:1
+  onBgDim:        '#4a4038',  // ~8:1  — body text, detail copy
+  onBgDimmer:     '#6a6458',  // ~4.6:1 — labels, counters, secondary UI
 
   // Griddy red accent
   accent:         '#e63928',
@@ -26,9 +26,9 @@ export const g = {
   // Ticket / reveal card — warm neutral white
   ticketBg:       '#faf7f2',
   ticketBorder:   '#d8d0c0',
-  onTicket:       '#1a1810',
-  onTicketMid:    '#48403a',
-  onTicketDim:    '#786860',
+  onTicket:       '#1a1810',  // ~19:1 on ticketBg
+  onTicketMid:    '#48403a',  // ~8.9:1
+  onTicketDim:    '#5e5248',  // ~6.2:1 — was #786860 at borderline 4.5:1
 
   // Correct / wrong — question card tint
   correctText:    '#1a7035',
